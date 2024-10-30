@@ -205,8 +205,8 @@ def test_component_iv():
     
 
 # test_component_i()
-test_component_ii()
-# test_component_iii()
+# test_component_ii()
+test_component_iii()
 # test_component_iv()
 
 print('\n*** All components tested ***')
