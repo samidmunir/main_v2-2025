@@ -134,4 +134,10 @@ if __name__ == '__main__':
             }
         )
     
-    # TODO: implementation of taking data & writing to CSV file.
+    with open('zameen_data.csv', 'w') as FILE:
+        FILE.write('city|location|price|bedrooms|bathrooms|size\n')
+        for HOUSE in HOUSE_DATA:
+            for DATA in HOUSE.get('info'):
+                FILE.write(
+                    f"{HOUSE.get('city')}|{DATA.get('location')}|{DATA.get('price')}|{DATA.get('bedrooms')}|{DATA.get('bathrooms')}|{DATA.get('size')}\n"
+                )
