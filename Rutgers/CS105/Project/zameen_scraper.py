@@ -5,11 +5,27 @@ from bs4 import BeautifulSoup as BS4
 NUMBER_OF_PAGES_TO_SEARCH = 20
 
 """
+    function convert_size(size) -> float:
+    - this function converts a given size (in kanal & merla) to square footage.
+        :param size: str
+        :return: float
+"""
+def convert_size(size) -> float:
+    if size.endswith('Marla'):
+        return round(float(size[:-5].replace(',', '')) * 225)
+    elif size.endswith('Kanal'):
+        return round(float(size[:-5].replace(',', '')) * 4500)
+    elif size.endswith('Sq. Yd.'):
+        return round(float(size[:-7].replace(',', '')) * 9)
+    else:
+        return round(float(size))
+
+"""
     function get_text(tag, data_type = 'str'):
     - this function will return the text of the parameter tag.
         :param tag: tag object
         :param data_type: num, str, price, OR size
-        :return: price (number of string)
+        :return: price (number or string)
 """
 def get_text(tag, data_type = 'str'):
     if tag is None and data_type == 'num':
