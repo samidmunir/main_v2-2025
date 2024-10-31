@@ -5,6 +5,37 @@ from bs4 import BeautifulSoup as BS4
 NUMBER_OF_PAGES_TO_SEARCH = 20
 
 """
+    function get_text(tag, data_type = 'str'):
+    - this function will return the text of the parameter tag.
+        :param tag: tag object
+        :param data_type: num, str, price, OR size
+        :return: price (number of string)
+"""
+def get_text(tag, data_type = 'str'):
+    if tag is None and data_type == 'num':
+        return 0
+    if data_type == 'num':
+        try:
+            return int(tag.text.strip())
+        except ValueError:
+            return 0
+    
+    if tag is None and data_type == 'str':
+        return ''
+    if data_type == 'str':
+        return tag.text.strip()
+    
+    if tag is None and data_type == 'price':
+        return 0.0
+    if data_type == 'price':
+        return convert_price(tag.text.strip())
+    
+    if tag is None and data_type == 'size':
+        return 0.0
+    if data_type == 'size':
+        return convert_size(tag.text.strip())
+
+"""
     function scrape_zameen(city: str, pages_range: int) -> list:
     - this function will scrape the zameen.com website and return a list of information regarding houses.
         :param city: str
@@ -35,11 +66,11 @@ def scrape_zameen(city: str, pages_range: int) -> list:
                     )
                 HOUSES_INFO.append(
                     {
-                        'location': text(LOCATION),
-                        'price': text(PRICE, datatype = 'num'),
-                        'bedrooms': text(BEDROOMS, datatype = 'num'),
-                        'baths': text(BATHROOMS, datatype = 'num'),
-                        'size': text(SIZE, datatype = 'size')
+                        'location': get_text(LOCATION),
+                        'price': get_text(PRICE, datatype = 'num'),
+                        'bedrooms': get_text(BEDROOMS, datatype = 'num'),
+                        'baths': get_text(BATHROOMS, datatype = 'num'),
+                        'size': get_text(SIZE, datatype = 'size')
                     }
                 )
         if len(HOUSES_INFO) == PREV_LEN:
