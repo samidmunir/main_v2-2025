@@ -103,10 +103,10 @@ def scrape_zameen(city: str, pages_range: int) -> list:
                 HOUSES_INFO.append(
                     {
                         'location': get_text(LOCATION),
-                        'price': get_text(PRICE, datatype = 'num'),
-                        'bedrooms': get_text(BEDROOMS, datatype = 'num'),
-                        'baths': get_text(BATHROOMS, datatype = 'num'),
-                        'size': get_text(SIZE, datatype = 'size')
+                        'price': get_text(PRICE, data_type = 'num'),
+                        'bedrooms': get_text(BEDROOMS, data_type = 'num'),
+                        'baths': get_text(BATHROOMS, data_type = 'num'),
+                        'size': get_text(SIZE, data_type = 'size')
                     }
                 )
         if len(HOUSES_INFO) == PREV_LEN:
