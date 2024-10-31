@@ -5,12 +5,32 @@ from bs4 import BeautifulSoup as BS4
 NUMBER_OF_PAGES_TO_SEARCH = 20
 
 """
-    function convert_size(size) -> float:
+    function convert_price(price: str) -> float:
+    - this function converts a given price in crore, lakhs, millions, thousands -> numbers (decimal).
+        :param price: str
+        :return: float
+"""
+def convert_price(price: str) -> float:
+    if price.endswith('Crore'):
+        return round(float(price[:-5]) * 10000000)
+    elif price.endswith('Lakh'):
+        return round(float(price[:-4]) * 100000)
+    elif price.endswith('Million'):
+        return round(float(price[:-7]) * 1000000)
+    elif price.endswith('Arab'):
+        return round(float(price[:-4]) * 1000000000)
+    elif price.endswith('Thousand'):
+        return round(float(price[:-8]) * 1000)
+    else:
+        return round(float(price))
+
+"""
+    function convert_size(size: str) -> float:
     - this function converts a given size (in kanal & merla) to square footage.
         :param size: str
         :return: float
 """
-def convert_size(size) -> float:
+def convert_size(size: str) -> float:
     if size.endswith('Marla'):
         return round(float(size[:-5].replace(',', '')) * 225)
     elif size.endswith('Kanal'):
